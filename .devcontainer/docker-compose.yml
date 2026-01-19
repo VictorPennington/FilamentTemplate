@@ -1,5 +1,6 @@
-name: FormApp
+name: FilamentTemplate
 services:
+  name: Laravel
   app:
     image: victorpennington/filament-template:latest
     # build:

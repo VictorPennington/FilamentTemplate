@@ -1,3 +1,7 @@
+# to build the image, run:
+# docker build -t victorpennington/filament-template:v1.1.0 --output type=docker .
+
+
 FROM composer:2.9.2
 FROM node:20.19.6-trixie-slim AS node_source
 FROM php:8.4-fpm
