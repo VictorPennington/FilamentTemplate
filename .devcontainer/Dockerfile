@@ -21,3 +21,4 @@ RUN ln -s /usr/bin/nodejs /usr/bin/node
 #Install Vite
 RUN npm i vite
 RUN apt-get install --yes --no-install-recommends git
+RUN apt update && apt install -y sqlite3
