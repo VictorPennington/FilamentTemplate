@@ -1,9 +1,10 @@
 name: FormApp
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: victorpennington/filament-template:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     volumes:
       - ..:/var/www/html:cached
 
