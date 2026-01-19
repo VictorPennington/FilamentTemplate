@@ -2,7 +2,7 @@ name: FilamentTemplate
 services:
   name: Laravel
   app:
-    image: victorpennington/filament-template:latest
+    image: victorpennington/filament-template:v1.1.0
     # build:
     #   context: .
     #   dockerfile: Dockerfile
