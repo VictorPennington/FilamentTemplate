@@ -1,6 +1,5 @@
 name: FilamentTemplate
 services:
-  name: Laravel
   app:
     image: victorpennington/filament-template:v1.1.0
     # build:

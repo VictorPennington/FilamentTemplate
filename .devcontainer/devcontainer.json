@@ -21,8 +21,8 @@
 
 	// Mount .gitconfig and credentials
 	"mounts": [
-		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached",
-		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.git-credentials,target=/root/.git-credentials,type=bind,consistency=cached"
+		"source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.git-credentials,target=/root/.git-credentials,type=bind,consistency=cached"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
