@@ -66,6 +66,13 @@ chmod 664 database/database.sqlite
 echo "✅ SQLite database file created"
 echo ""
 
+# Update Composer dependencies
+echo "📦 Updating Composer dependencies..."
+composer update
+echo "✅ Composer dependencies updated"
+echo ""
+
+
 # Generate application key
 echo "🔑 Generating application key..."
 php artisan key:generate
