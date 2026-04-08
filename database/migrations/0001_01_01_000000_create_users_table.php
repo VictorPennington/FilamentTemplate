@@ -39,10 +39,9 @@ return new class extends Migration
 
         if (app()->environment('local')) {
         User::factory()->create([
-            "name"=>"dev", 
-            "email"=>"dev@mail.co.uk",
+            "name"=>"victor", 
+            "email"=>"victor@wisehill.co.uk",
             "password"=>"D3v3l0p3r123!!",     
-            
         ]);
         }
     }

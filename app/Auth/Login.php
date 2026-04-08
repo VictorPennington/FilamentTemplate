@@ -10,7 +10,7 @@ class Login extends \Filament\Auth\Pages\Login
 
         if (app()->environment('local')) {
             $this->form->fill([
-                'email' => 'dev@mail.co.uk',
+                'email' => 'victor@wisehill.co.uk',
                 'password' => 'D3v3l0p3r123!!',
                 'remember' => true,
             ]);
