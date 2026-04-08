@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "641646c94c8c3bfd8cdc04c9793ee801",
+    "content-hash": "a231881f31ccee9327edb6cf12538eb2",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -8205,6 +8205,28 @@
                 }
             ],
             "time": "2025-08-14T07:29:31+00:00"
+        },
+        {
+            "name": "filament/blueprint",
+            "version": "v1.1.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://packages.filamentphp.com/composer/10/551/download"
+            },
+            "require": {
+                "filament/support": "^4.0",
+                "laravel/boost": "^1.8|^2.0"
+            },
+            "type": "library",
+            "license": [
+                "proprietary"
+            ],
+            "description": "Guidelines for AI agents to produce detailed Filament implementation plans.",
+            "homepage": "https://github.com/filamentphp/filament",
+            "support": {
+                "issues": "https://github.com/filamentphp/filament/issues",
+                "source": "https://github.com/filamentphp/filament"
+            }
         },
         {
             "name": "filament/upgrade",
