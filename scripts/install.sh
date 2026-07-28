@@ -9,13 +9,6 @@ echo "=========================================="
 echo "Starting Application Installation"
 echo "=========================================="
 
-# Ensure database exists
-if [ ! -f "database/database.sqlite" ]; then
-    echo "🗄️  Creating SQLite database..."
-    touch database/database.sqlite
-    chmod 664 database/database.sqlite
-fi
-
 # Install dependencies
 echo "📦 Installing Composer dependencies..."
 composer install --no-interaction --prefer-dist --optimize-autoloader

@@ -34,7 +34,17 @@ fi
 if [ -f ".devcontainer/docker-compose.yml" ]; then
     sed -i "s/^name: .*/name: $PROJECT_NAME/" .devcontainer/docker-compose.yml
     sed -i "s/image: .*/image: $PROJECT_NAME_LOWER:latest/" .devcontainer/docker-compose.yml
-    echo "✅ Updated .devcontainer/docker-compose.yml (name and image)"
+    
+    # Rename MySQL service variables
+    sed -i "s/container_name: filament-db/container_name: ${PROJECT_NAME_LOWER}-db/" .devcontainer/docker-compose.yml
+    sed -i "s/container_name: filament-phpmyadmin/container_name: ${PROJECT_NAME_LOWER}-phpmyadmin/" .devcontainer/docker-compose.yml
+    sed -i "s/MYSQL_DATABASE: .*/MYSQL_DATABASE: ${PROJECT_NAME_LOWER}_db/" .devcontainer/docker-compose.yml
+    sed -i "s/MYSQL_USER: .*/MYSQL_USER: ${PROJECT_NAME_LOWER}_user/" .devcontainer/docker-compose.yml
+    sed -i "s/MYSQL_PASSWORD: .*/MYSQL_PASSWORD: filament_password/" .devcontainer/docker-compose.yml
+    sed -i "s/MYSQL_ROOT_PASSWORD: .*/MYSQL_ROOT_PASSWORD: filament_password/" .devcontainer/docker-compose.yml
+    sed -i "s/PMA_PASSWORD: .*/PMA_PASSWORD: filament_password/" .devcontainer/docker-compose.yml
+    
+    echo "✅ Updated .devcontainer/docker-compose.yml (services and image)"
 fi
 
 # Set up .env
@@ -45,7 +55,23 @@ fi
 
 # Update APP_NAME in .env
 sed -i "s/^APP_NAME=.*/APP_NAME=\"$PROJECT_NAME\"/" .env
-echo "✅ Updated APP_NAME in .env"
+
+# Update DB configuration in .env
+sed -i "s/^DB_CONNECTION=.*/DB_CONNECTION=mysql/" .env
+sed -i "s/^# DB_HOST=.*/DB_HOST=db/" .env
+sed -i "s/^# DB_PORT=.*/DB_PORT=3306/" .env
+sed -i "s/^# DB_DATABASE=.*/DB_DATABASE=${PROJECT_NAME_LOWER}_db/" .env
+sed -i "s/^# DB_USERNAME=.*/DB_USERNAME=${PROJECT_NAME_LOWER}_user/" .env
+sed -i "s/^# DB_PASSWORD=.*/DB_PASSWORD=filament_password/" .env
+
+# Handle already uncommented DB variables if any
+sed -i "s/^DB_HOST=.*/DB_HOST=db/" .env
+sed -i "s/^DB_PORT=.*/DB_PORT=3306/" .env
+sed -i "s/^DB_DATABASE=.*/DB_DATABASE=${PROJECT_NAME_LOWER}_db/" .env
+sed -i "s/^DB_USERNAME=.*/DB_USERNAME=${PROJECT_NAME_LOWER}_user/" .env
+sed -i "s/^DB_PASSWORD=.*/DB_PASSWORD=filament_password/" .env
+
+echo "✅ Updated .env configuration"
 
 # Update composer.json name
 if [ -f "composer.json" ]; then
