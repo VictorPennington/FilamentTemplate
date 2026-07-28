@@ -117,7 +117,7 @@ return new class extends Migration
         });
 
         Role::create(['name' => 'super-admin']);
-        User::where('email', 'victor@wisehill.co.uk')->first()->assignRole('super-admin');
+        User::where('email', 'victor@wisehill.co.uk')->first()?->assignRole('super-admin');
 
         app('cache')
             ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)
