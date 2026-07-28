@@ -3,7 +3,7 @@
 
 
 FROM composer:2.9.2
-FROM node:20.19.6-trixie-slim AS node_source
+FROM node:22-slim AS node_source
 FROM php:8.4-fpm
 
 WORKDIR /var/www/html
