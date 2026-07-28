@@ -5,6 +5,10 @@
 
 set -e
 
+# Fix "dubious ownership" in Git for the workspace directory
+# This is required because the directory is mounted from the host and owned by a different user.
+git config --system --add safe.directory /var/www/html
+
 echo "=========================================="
 echo "Starting Application Installation"
 echo "=========================================="
@@ -22,13 +26,14 @@ if ! grep -q "APP_KEY=base64:" .env; then
     php artisan key:generate
 fi
 
+# Wait 5 seconds
+sleep 5
+
 # Run migrations
 echo "🚀 Running database migrations..."
 php artisan migrate --force
 
-# Build assets
-echo "🏗️  Building assets..."
-npm run build
+
 
 echo ""
 echo "=========================================="
