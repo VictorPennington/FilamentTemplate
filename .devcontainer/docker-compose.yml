@@ -19,7 +19,7 @@ services:
       MYSQL_USER: filament_user
       MYSQL_PASSWORD: filament_password
     ports:
-      - "3306:3306"
+      - "3312:3306"
     volumes:
       - db_data:/var/lib/mysql
 
@@ -34,7 +34,7 @@ services:
       PMA_PASSWORD: filament_password
       UPLOAD_LIMIT: 64M      
     ports:
-      - "8081:80"
+      - "8092:80"
 
 volumes:
   db_data:

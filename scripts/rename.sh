@@ -17,11 +17,21 @@ if [ -z "$PROJECT_NAME" ]; then
     exit 1
 fi
 
+# Ask for database port
+read -p "Enter database host port (default: 3312): " DB_PORT
+DB_PORT=${DB_PORT:-3312}
+
+# Ask for phpMyAdmin port
+read -p "Enter phpMyAdmin host port (default: 8092): " PMA_PORT
+PMA_PORT=${PMA_PORT:-8092}
+
 PROJECT_NAME_LOWER=$(echo "$PROJECT_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g')
 
 echo ""
 echo "📝 Setting project name to: $PROJECT_NAME"
 echo "📝 Slugified name: $PROJECT_NAME_LOWER"
+echo "📝 Database port: $DB_PORT"
+echo "📝 phpMyAdmin port: $PMA_PORT"
 echo ""
 
 # Update devcontainer.json
@@ -44,7 +54,11 @@ if [ -f ".devcontainer/docker-compose.yml" ]; then
     sed -i "s/MYSQL_ROOT_PASSWORD: .*/MYSQL_ROOT_PASSWORD: filament_password/" .devcontainer/docker-compose.yml
     sed -i "s/PMA_PASSWORD: .*/PMA_PASSWORD: filament_password/" .devcontainer/docker-compose.yml
     
-    echo "✅ Updated .devcontainer/docker-compose.yml (services and image)"
+    # Update Ports
+    sed -i "s/\"3312:3306\"/\"$DB_PORT:3306\"/" .devcontainer/docker-compose.yml
+    sed -i "s/\"8092:80\"/\"$PMA_PORT:80\"/" .devcontainer/docker-compose.yml
+
+    echo "✅ Updated .devcontainer/docker-compose.yml (services, image, and ports)"
 fi
 
 # Set up .env
