@@ -1,5 +1,5 @@
 # to build the image, run:
-# docker build -t victorpennington/filament-template:v1.1.0 --output type=docker .
+# docker build -t victorpennington/filament-app:template --output type=docker .
 
 
 FROM composer:2.9.2
