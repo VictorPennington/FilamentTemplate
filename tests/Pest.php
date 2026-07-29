@@ -50,13 +50,13 @@ function something()
 }
 
 pest()->beforeEach(function () {
-    static $printed = false;
+    global $pest_env_printed;
 
-    if ($printed) {
+    if ($pest_env_printed) {
         return;
     }
 
-    $printed = true;
+    $pest_env_printed = true;
 
     try {
         if (! function_exists('app')) {

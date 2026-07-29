@@ -49,7 +49,7 @@ if [ -f ".devcontainer/docker-compose.yml" ]; then
     sed -i "s/container_name: filament-db/container_name: ${PROJECT_NAME_LOWER}-db/" .devcontainer/docker-compose.yml
     sed -i "s/container_name: filament-phpmyadmin/container_name: ${PROJECT_NAME_LOWER}-phpmyadmin/" .devcontainer/docker-compose.yml
     sed -i "s/MYSQL_DATABASE: .*/MYSQL_DATABASE: ${PROJECT_NAME_LOWER}_db/" .devcontainer/docker-compose.yml
-    sed -i "s/CREATE DATABASE IF NOT EXISTS filament; CREATE DATABASE IF NOT EXISTS test_db;/CREATE DATABASE IF NOT EXISTS ${PROJECT_NAME_LOWER}_db; CREATE DATABASE IF NOT EXISTS ${PROJECT_NAME_LOWER}_test_db;/" .devcontainer/docker-compose.yml
+    sed -i "s/GRANT ALL PRIVILEGES ON filament.* TO 'filament_user'@'%'; GRANT ALL PRIVILEGES ON test_db.* TO 'filament_user'@'%'; CREATE DATABASE IF NOT EXISTS filament; CREATE DATABASE IF NOT EXISTS test_db; GRANT ALL PRIVILEGES ON filament.* TO 'filament_user'@'%'; GRANT ALL PRIVILEGES ON test_db.* TO 'filament_user'@'%';/GRANT ALL PRIVILEGES ON ${PROJECT_NAME_LOWER}_db.* TO '${PROJECT_NAME_LOWER}_user'@'%'; GRANT ALL PRIVILEGES ON ${PROJECT_NAME_LOWER}_test_db.* TO '${PROJECT_NAME_LOWER}_user'@'%'; CREATE DATABASE IF NOT EXISTS ${PROJECT_NAME_LOWER}_db; CREATE DATABASE IF NOT EXISTS ${PROJECT_NAME_LOWER}_test_db; GRANT ALL PRIVILEGES ON ${PROJECT_NAME_LOWER}_db.* TO '${PROJECT_NAME_LOWER}_user'@'%'; GRANT ALL PRIVILEGES ON ${PROJECT_NAME_LOWER}_test_db.* TO '${PROJECT_NAME_LOWER}_user'@'%';/" .devcontainer/docker-compose.yml
     sed -i "s/DB_DATABASE: \"filament\"/DB_DATABASE: \"${PROJECT_NAME_LOWER}_db\"/" .devcontainer/docker-compose.yml
     sed -i "s/MYSQL_USER: .*/MYSQL_USER: ${PROJECT_NAME_LOWER}_user/" .devcontainer/docker-compose.yml
     sed -i "s/MYSQL_PASSWORD: .*/MYSQL_PASSWORD: filament_password/" .devcontainer/docker-compose.yml
@@ -82,14 +82,14 @@ sed -i "s/^DB_CONNECTION=.*/DB_CONNECTION=mysql/" .env
 sed -i "s/^# DB_HOST=.*/DB_HOST=db/" .env
 sed -i "s/^# DB_PORT=.*/DB_PORT=3306/" .env
 sed -i "s/^# DB_DATABASE=.*/DB_DATABASE=${PROJECT_NAME_LOWER}_db/" .env
-sed -i "s/^# DB_USERNAME=.*/DB_USERNAME=${PROJECT_NAME_LOWER}_user/" .env
+sed -i "s/^# DB_USERNAME=.*/DB_USERNAME=root/" .env
 sed -i "s/^# DB_PASSWORD=.*/DB_PASSWORD=filament_password/" .env
 
 # Handle already uncommented DB variables if any
 sed -i "s/^DB_HOST=.*/DB_HOST=db/" .env
 sed -i "s/^DB_PORT=.*/DB_PORT=3306/" .env
 sed -i "s/^DB_DATABASE=.*/DB_DATABASE=${PROJECT_NAME_LOWER}_db/" .env
-sed -i "s/^DB_USERNAME=.*/DB_USERNAME=${PROJECT_NAME_LOWER}_user/" .env
+sed -i "s/^DB_USERNAME=.*/DB_USERNAME=root/" .env
 sed -i "s/^DB_PASSWORD=.*/DB_PASSWORD=filament_password/" .env
 
 echo "✅ Updated .env configuration"
