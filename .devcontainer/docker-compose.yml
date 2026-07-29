@@ -1,10 +1,7 @@
 name: FilamentTemplate
 services:
   app:
-    image: filament-app:latest
-    build:
-      context: ..
-      dockerfile: .devcontainer/Dockerfile
+    image: filament-app:template
     volumes:
       - ..:/var/www/html:cached
     depends_on:
