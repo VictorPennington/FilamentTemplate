@@ -48,3 +48,27 @@ function something()
 {
     // ..
 }
+
+pest()->beforeEach(function () {
+    static $printed = false;
+
+    if ($printed) {
+        return;
+    }
+
+    $printed = true;
+
+    try {
+        if (! function_exists('app')) {
+            return;
+        }
+
+        $defaultConnection = config('database.default');
+        $databaseName = config("database.connections.{$defaultConnection}.database");
+
+        fwrite(STDERR, "\n[PEST] env=" . app()->environment() . " db_connection=" . $defaultConnection . " database=" . $databaseName . "\n");
+    } catch (\Throwable) {
+        // Silently fail if app is not fully booted
+    }
+});
+

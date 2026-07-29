@@ -11,12 +11,18 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         static $printed = false;
+
         if (! $printed) {
             $printed = true;
-            $defaultConnection = config('database.default');
-            $databaseName = config("database.connections.{$defaultConnection}.database");
+            try {
+                $defaultConnection = config('database.default');
+                $databaseName = config("database.connections.{$defaultConnection}.database");
 
-            fwrite(STDERR, "\n[TEST ENV] app_env=" . app()->environment() . " default_db=" . $defaultConnection . " database=" . $databaseName . "\n");
+                fwrite(STDERR, "\n[TEST ENV] env=" . app()->environment() . " db_connection=" . $defaultConnection . " database=" . $databaseName . "\n");
+                fflush(STDERR);
+            } catch (\Throwable) {
+                // Skip if not ready
+            }
         }
     }
 }

@@ -49,8 +49,15 @@ if [ -f ".devcontainer/docker-compose.yml" ]; then
     sed -i "s/container_name: filament-db/container_name: ${PROJECT_NAME_LOWER}-db/" .devcontainer/docker-compose.yml
     sed -i "s/container_name: filament-phpmyadmin/container_name: ${PROJECT_NAME_LOWER}-phpmyadmin/" .devcontainer/docker-compose.yml
     sed -i "s/MYSQL_DATABASE: .*/MYSQL_DATABASE: ${PROJECT_NAME_LOWER}_db/" .devcontainer/docker-compose.yml
+    sed -i "s/CREATE DATABASE IF NOT EXISTS filament; CREATE DATABASE IF NOT EXISTS test_db;/CREATE DATABASE IF NOT EXISTS ${PROJECT_NAME_LOWER}_db; CREATE DATABASE IF NOT EXISTS ${PROJECT_NAME_LOWER}_test_db;/" .devcontainer/docker-compose.yml
+    sed -i "s/DB_DATABASE: \"filament\"/DB_DATABASE: \"${PROJECT_NAME_LOWER}_db\"/" .devcontainer/docker-compose.yml
     sed -i "s/MYSQL_USER: .*/MYSQL_USER: ${PROJECT_NAME_LOWER}_user/" .devcontainer/docker-compose.yml
     sed -i "s/MYSQL_PASSWORD: .*/MYSQL_PASSWORD: filament_password/" .devcontainer/docker-compose.yml
+    
+    # Update PHPUnit test database
+    if [ -f "phpunit.xml" ]; then
+        sed -i "s/<env name=\"DB_DATABASE\" value=\"test_db\"\/>/<env name=\"DB_DATABASE\" value=\"${PROJECT_NAME_LOWER}_test_db\"\/>/g" phpunit.xml
+    fi
     sed -i "s/MYSQL_ROOT_PASSWORD: .*/MYSQL_ROOT_PASSWORD: filament_password/" .devcontainer/docker-compose.yml
     sed -i "s/PMA_PASSWORD: .*/PMA_PASSWORD: filament_password/" .devcontainer/docker-compose.yml
     
